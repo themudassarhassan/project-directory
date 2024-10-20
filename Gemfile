@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
+# Specifies ruby version.
+ruby File.read('./.ruby-version')
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.0.beta1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
