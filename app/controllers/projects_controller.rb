@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [ :show, :edit, :update, :destroy ]
-  before_action :authorize_user, only: [:edit, :update, :destroy]
+  before_action :authorize_user, only: [ :edit, :update, :destroy ]
 
   def index
     @projects = Project.order(created_at: :desc)
@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
 
   def edit
   end
-  
+
   def update
     if @project.update(project_params)
       redirect_to projects_url, notice: "Project updated successfully."
@@ -50,7 +50,7 @@ class ProjectsController < ApplicationController
     def set_project
       @project = Project.find(params[:id])
     end
-    
+
     def authorize_user
       authorize @project
     end

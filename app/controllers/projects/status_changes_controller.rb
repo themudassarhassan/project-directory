@@ -15,7 +15,7 @@ class Projects::StatusChangesController < ApplicationController
     def set_project
       @project = Project.find(params[:project_id])
     end
-    
+
     def status_change_params
       params.permit(:status).merge(user: current_user)
     end

@@ -2,7 +2,7 @@ class ProjectPolicy < ApplicationPolicy
   def update?
     record.user_id == user.id
   end
-  
+
   def edit?
     update?
   end
