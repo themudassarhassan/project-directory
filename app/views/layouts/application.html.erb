@@ -24,7 +24,22 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <% if authenticated? %>
+      <header class="bg-blue-500 text-white shadow">
+        <div class="container mx-auto flex justify-between items-center px-6 py-3">
+          <div>
+            <a href="/" class="font-bold text-lg">
+              Project Management
+            </a>
+          </div>
+          <nav class="space-x-4 text-sm sm:text-base">
+            <%= current_user.name %>
+            <%= link_to 'Logout', session_url, data: { turbo_method: :delete}, class: "no-underline hover:underline" %>
+          </nav>
+        </div>
+      </header>
+    <% end %>
+    <main class="container mx-auto mt-16 px-5">
       <%= yield %>
     </main>
   </body>

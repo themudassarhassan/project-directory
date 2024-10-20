@@ -1,0 +1,6 @@
+<%= link_to project_path(project), class: "block" do %>  
+  <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+    <h2 class="text-xl font-semibold mb-2"><%= project.name %></h2>
+    <p class="text-sm text-gray-600">Status: <span class="text-green-500"><%= project.current_status.humanize %></span></p>
+  </div>
+<% end %>
