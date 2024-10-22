@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
       start_new_session_for user
       redirect_to after_authentication_url
     else
-      redirect_to new_registration_url, alert: user.errors.full_message
+      redirect_to new_registration_url, alert: user.errors.full_messages.join(',')
     end
   end
 
