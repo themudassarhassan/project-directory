@@ -7,4 +7,10 @@
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   <%= render @projects %>
-<div>
+</div>
+
+<% if @has_more %>
+  <div class="my-7 flex justify-center">
+    <%= link_to 'Load More', projects_path(page: params[:page] ? params[:page].to_i + 1 : 2), class: "bg-green-500 text-white p-2 rounded" %>
+  </div>
+<% end %>

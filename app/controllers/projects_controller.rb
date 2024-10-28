@@ -1,9 +1,12 @@
 class ProjectsController < ApplicationController
+  PER_PAGE = 12
+  
   before_action :set_project, only: [ :show, :edit, :update, :destroy ]
   before_action :authorize_user, only: [ :edit, :update, :destroy ]
 
   def index
-    @projects = Project.order(created_at: :desc)
+    @projects = Project.order(created_at: :desc).limit(limit)
+    @has_more = Project.count > limit
   end
 
   def new
@@ -53,5 +56,13 @@ class ProjectsController < ApplicationController
 
     def authorize_user
       authorize @project
+    end
+    
+    def limit
+      page * PER_PAGE
+    end
+    
+    def page
+      params[:page]&.to_i || 1
     end
 end
