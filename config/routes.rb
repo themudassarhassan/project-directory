@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :projects do
     scope module: "projects" do
-      resource :status_change, only: :create
+      resource :status_change, only: [:create]
     end
 
     resources :comments, shallow: true

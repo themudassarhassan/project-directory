@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_project
+  before_action :set_project, only: [:create]
+  before_action :set_comment, only: [:edit, :update, :destroy]
 
   def create
     @comment = @project.comments.new(comment_params.merge(user: current_user))
@@ -7,10 +8,20 @@ class CommentsController < ApplicationController
     if @comment.save
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to @project }
       end
     else
       head :no_content
+    end
+  end
+  
+  def edit
+  end
+
+  def update
+    if @comment.update(comment_params)
+      render partial: 'comment', locals: { comment: @comment }
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -19,7 +30,6 @@ class CommentsController < ApplicationController
       @comment.destroy
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to @project }
       end
     else
       head :forbidden
@@ -28,6 +38,10 @@ class CommentsController < ApplicationController
 
 
   private
+    def set_comment
+      @comment = Comment.find(params[:id])
+    end
+
     def set_project
       @project = Project.find(params[:project_id])
     end
